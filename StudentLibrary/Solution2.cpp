@@ -1,7 +1,7 @@
 #include "Solution2.h"
 #include <fstream>
 #include <sstream>
-#include <ostream>
+#include <iostream>
 
 // Don't forget to enable the exercise in the SudentConfiguration.h file !
 #include "StudentConfiguration.h"
@@ -17,7 +17,7 @@ float Solution2::GetBalance(const std::string& accountName)
     }
 
     float balance = 0.0f;
-    char operation;
+    std::string operation;
     float amount;
 
     std::string line;
@@ -28,19 +28,17 @@ float Solution2::GetBalance(const std::string& accountName)
             throw std::runtime_error("Error reading file");
         }
 
-        switch (operation) {
-        case '+':
+        if (operation == "DEPOSIT") {
             balance += amount;
-            break;
-        case '-':
+        }
+        else if (operation == "WITHDRAW") {
             balance -= amount;
-            break;
-        default:
+        }
+        else {
             throw std::runtime_error("Invalid operation in file");
         }
     }
     file.close();
     return balance;
 }
-
 #endif
